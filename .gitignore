@@ -1,0 +1,332 @@
+# .gitignore for .NET 9 Wallet Service
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio cache/options
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+## Rider
+.idea/
+*.sln.iml
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## NuGet
+*.nupkg
+*.snupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## StyleCop
+StyleCopReport.xml
+
+## Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+## Caches
+ClientBin/
+[Ss]tyle[Cc]op.*
+![Ss]tyle[Cc]op.targets
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+
+## Backup & report files
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+*.rptproj.bak
+
+## SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+## Business Intelligence projects
+*.rdl.data
+*.bim.layout
+*.bim_*.settings
+*.rptproj.rsuser
+*- [Bb]ackup.rdl
+*- [Bb]ackup ([0-9]).rdl
+*- [Bb]ackup ([0-9][0-9]).rdl
+
+## Microsoft Fakes
+FakesAssemblies/
+
+## GhostDoc plugin setting file
+*.GhostDoc.xml
+
+## Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+## Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+## JetBrains Rider
+.idea/
+*.sln.iml
+
+## CodeRush personal settings
+.cr/personal
+
+## Python Tools for Visual Studio (PTVS)
+__pycache__/
+*.pyc
+
+## Cake
+tools/**
+!tools/packages.config
+
+## Tabs Studio
+*.tss
+
+## Telerik's JustMock configuration file
+*.jmconfig
+
+## BizTalk build output
+*.btp.cs
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+
+## OpenCover UI analysis results
+OpenCover/
+
+## Azure Stream Analytics local run output
+ASALocalRun/
+
+## MSBuild Binary and Structured Log
+*.binlog
+
+## NVidia Nsight GPU debugger configuration file
+*.nvuser
+
+## MFractors (Xamarin productivity tools) working folder
+.mfractor/
+
+## Local History for Visual Studio
+.localhistory/
+
+## Visual Studio History (VSHistory) files
+.vshistory/
+
+## BeatPulse healthcheck temp database
+healthchecksdb
+
+## Backup folder for Package Reference Convert tool in Visual Studio 2017
+MigrationBackup/
+
+## Ionide (cross platform F# VS Code tools) working folder
+.ionide/
+
+## Fody - auto-generated XML schema
+FodyWeavers.xsd
+
+## VS Code files for those working on multiple tools
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+## Local History for Visual Studio Code
+.history/
+
+## Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+## Folder config file
+Desktop.ini
+
+## Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+## Mac desktop service store files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Sensitive data
+*.secret
+*.secrets
+appsettings.Development.json
+appsettings.*.json
+!appsettings.json
+!appsettings.Production.json
+
+## Environment variables
+.env
+.env.local
+.env.*.local
+
+## Database files
+*.db
+*.sqlite
+*.sqlite3
+
+## Log files
+*.log
+
+## Temp files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+## OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+## Redis dump
+dump.rdb
+
+## Kafka logs
+kafka-logs/
+zookeeper-data/
+
+## Test coverage results
+coverage/
+*.coverage
+*.coveragexml
+
+## Benchmark results
+BenchmarkDotNet.Artifacts/
+
+## User-specific startup scripts
+start-all.bat
+stop-all.bat
+test.bat
+status.bat
+
+##############################################
+# Personal Learning Materials (Not for GitHub)
+##############################################
+
+## Personal documentation folder
+_personal/
+
+## Installation guides (beginner level)
+INSTALLATION_GUIDE_COMPLETE_BEGINNER.md
+INSTALLATION_CHECKLIST.md
+TROUBLESHOOTING_GUIDE.md
+QUICKSTART_DAILY.md
+START_HERE.md
+
+## GitHub workflow guides
+PUSH_TO_GITHUB.md
+PUSH_TO_GITHUB_SIMPLE.md
+GITHUB_SETUP.md
+push-to-github.bat
+
+## Migration documentation
+INSTALL_NET9.md
+docs/MIGRATION_NET9.md
+docs/MIGRATION_NET9_SUMMARY.md
+
+## Internal process documentation
+docs/REFACTORING_CHECKLIST.md
+docs/CRITICAL_ISSUES.md
+docs/VERIFICATION.md
+docs/INDEX.md
+REQUIREMENTS_FULFILLMENT.md
+
+## Personal README
+README_PERSONAL.md
+
+## Documentation strategy
+DOCUMENTATION_STRATEGY.md
+
+##############################################
+# Keep These (Professional Documentation)
+##############################################
+# README_PUBLIC.md (rename to README.md before pushing)
+# docs/DESIGN_DECISIONS.md
+# docs/MANUAL_TESTING.md
+# docs/PERFORMANCE.md
+# docs/REFACTORING_SUMMARY.md
+# docs/FINAL_SUMMARY.md
+# docs/REFACTORING_COMPLETE.md

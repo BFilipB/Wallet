@@ -1,0 +1,183 @@
+# Wallet Service - Performance Optimization Guide
+
+## SQL Performance Optimization
+
+### Problem Diagnosis
+
+When the wallet history query is slow (2.5 seconds):
+
+```sql
+SELECT * FROM WalletTransactions
+WHERE PlayerId = @playerId
+ORDER BY CreatedAt DESC;
+```
+
+#### Step 1: Diagnose the Issue
+
+```sql
+-- Check query execution plan
+EXPLAIN ANALYZE 
+SELECT * FROM WalletTransactions
+WHERE PlayerId = 'player-001'
+ORDER BY CreatedAt DESC;
+
+-- Check table statistics
+SELECT 
+    schemaname,
+    tablename,
+    n_live_tup as row_count,
+    n_dead_tup as dead_rows,
+    last_vacuum,
+    last_autovacuum
+FROM pg_stat_user_tables 
+WHERE tablename = 'wallettransactions';
+
+-- Check missing indexes
+SELECT 
+    schemaname,
+    tablename,
+    indexname,
+    idx_scan,
+    idx_tup_read,
+    idx_tup_fetch
+FROM pg_stat_user_indexes
+WHERE tablename = 'wallettransactions';
+```
+
+### Step 2: Required Indexes
+
+The following indexes are defined in `database/schema.sql`:
+
+```sql
+-- Primary index for player history lookup with ordering
+CREATE INDEX IX_WalletTransactions_PlayerId_CreatedAt 
+ON WalletTransactions(PlayerId, CreatedAt DESC);
+
+-- Index for idempotency checks
+CREATE INDEX IX_WalletTransactions_ExternalRef 
+ON WalletTransactions(ExternalRef);
+```
+
+**Why these indexes work:**
+- `IX_WalletTransactions_PlayerId_CreatedAt`: Composite index covering both WHERE and ORDER BY clauses
+- Ordering (DESC) matches query pattern
+- Eliminates need for separate sort operation
+
+### Step 3: Redis Caching Strategy
+
+#### Current Implementation
+- Cache key: `wallet:history:{playerId}`
+- TTL: 2 minutes
+- Cached after first DB query
+
+#### When to Invalidate Cache
+
+1. **After Top-Up** (Currently Missing - Fixed below)
+   - Invalidate when new transaction is created
+   - Ensures fresh data on next read
+
+2. **Time-Based Expiration**
+   - Already implemented: 2-minute TTL
+   - Good for eventually consistent scenarios
+
+3. **Manual Invalidation**
+   - Admin operations
+   - Bulk corrections
+
+#### Cache Hit Metrics
+- Monitor cache hit rate
+- Target: >80% cache hit rate
+- Adjust TTL based on update frequency
+
+## Kafka Partitioning Strategy
+
+### Recommended Setup for 50,000 updates/minute
+
+**Partitions: 12-16**
+
+**Reasoning:**
+```
+50,000 messages/min ÷ 60 seconds = ~833 msg/sec
+With 12 partitions: ~70 msg/sec per partition
+With 16 partitions: ~52 msg/sec per partition
+```
+
+**Consumer Scaling:**
+- Start with 4-8 consumer instances
+- Each consumer handles 2-3 partitions
+- Scale up to match partition count (max benefit)
+
+### Partition Key Strategy
+
+```csharp
+// In message producer - partition by PlayerId
+var message = new Message<string, string>
+{
+    Key = request.PlayerId,  // Ensures same player goes to same partition
+    Value = JsonSerializer.Serialize(request)
+};
+```
+
+**Benefits:**
+- Ordered processing per player
+- No race conditions for same player
+- Even distribution (assuming diverse playerIds)
+
+## Monitoring & APM
+
+### Key Metrics to Track
+
+1. **API Metrics**
+   - Request duration (p50, p95, p99)
+   - Error rate
+   - Throughput (req/sec)
+
+2. **Database Metrics**
+   - Query duration
+   - Connection pool usage
+   - Transaction rollback rate
+
+3. **Kafka Metrics**
+   - Consumer lag
+   - Message processing time
+   - Poison message count
+
+4. **Redis Metrics**
+   - Cache hit rate
+   - Memory usage
+   - Connection count
+
+### Performance Targets
+
+| Metric | Target |
+|--------|--------|
+| API Response Time (p95) | < 200ms |
+| DB Query Time (indexed) | < 50ms |
+| Cache Hit Rate | > 80% |
+| Kafka Consumer Lag | < 1000 messages |
+| Message Processing | < 100ms |
+
+## Redis Performance Tips
+
+1. **Use Pipeline for Batch Operations**
+2. **Monitor Memory Usage** (set maxmemory-policy)
+3. **Use Connection Multiplexer** (already implemented)
+4. **Avoid Large Keys** (limit history to 100 records)
+
+## Database Maintenance
+
+```sql
+-- Regular maintenance
+VACUUM ANALYZE WalletTransactions;
+REINDEX TABLE WalletTransactions;
+
+-- Monitor table bloat
+SELECT 
+    schemaname,
+    tablename,
+    pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) AS size,
+    n_dead_tup
+FROM pg_stat_user_tables
+WHERE n_dead_tup > 1000
+ORDER BY n_dead_tup DESC;
+```
