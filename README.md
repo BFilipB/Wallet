@@ -8,7 +8,20 @@
 
 A high-performance, production-ready wallet microservice built with .NET 9, demonstrating modern distributed systems patterns and best practices.
 
-## ?? Key Features
+## ?? Getting Started
+
+**Choose your path:**
+
+- ?? **[Complete Beginners Guide](SETUP_GUIDE_BEGINNERS.md)** - Step-by-step setup with screenshots and explanations (30-45 mins)
+- ?? **[Visual Quick Guide](SETUP_GUIDE_VISUAL.md)** - Diagrams and flowcharts for visual learners (20-30 mins)
+- ? **[5-Minute Quickstart](QUICKSTART.md)** - Fast setup using Docker for experienced developers
+- ?? **[Manual Setup](docs/MANUAL_TESTING.md)** - Install services locally without Docker
+
+**First time here?** Start with the [Complete Beginners Guide](SETUP_GUIDE_BEGINNERS.md) - no prior knowledge required!
+
+---
+
+## ? Key Features
 
 - **?? Idempotency** - Guaranteed exactly-once processing using external reference tracking
 - **?? Event-Driven Architecture** - Kafka-based messaging with transactional outbox pattern

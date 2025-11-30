@@ -1,5 +1,8 @@
--- Database Schema for Wallet Service
--- PostgreSQL 14+
+-- Grant full permissions to gameuser and create all tables
+
+-- Grant schema ownership
+ALTER DATABASE wallet OWNER TO gameuser;
+ALTER SCHEMA public OWNER TO gameuser;
 
 -- Wallets table
 CREATE TABLE IF NOT EXISTS Wallets (
@@ -46,34 +49,13 @@ CREATE TABLE IF NOT EXISTS PoisonMessages (
     LastRetryAt TIMESTAMP NULL
 );
 
--- ==========================================
--- PERFORMANCE INDEXES
--- ==========================================
+-- Performance indexes
+CREATE INDEX IF NOT EXISTS IX_WalletTransactions_ExternalRef ON WalletTransactions(ExternalRef);
+CREATE INDEX IF NOT EXISTS IX_WalletTransactions_PlayerId_CreatedAt ON WalletTransactions(PlayerId, CreatedAt DESC);
+CREATE INDEX IF NOT EXISTS IX_Outbox_Published_CreatedAt ON Outbox(Published, CreatedAt) WHERE Published = FALSE;
+CREATE INDEX IF NOT EXISTS IX_PoisonMessages_FailedAt ON PoisonMessages(FailedAt DESC);
 
--- Index for idempotency check (most critical - used on every request)
-CREATE INDEX IF NOT EXISTS IX_WalletTransactions_ExternalRef 
-ON WalletTransactions(ExternalRef);
-
--- Index for history queries (player lookup with ordering)
-CREATE INDEX IF NOT EXISTS IX_WalletTransactions_PlayerId_CreatedAt 
-ON WalletTransactions(PlayerId, CreatedAt DESC);
-
--- Index for outbox processing
-CREATE INDEX IF NOT EXISTS IX_Outbox_Published_CreatedAt 
-ON Outbox(Published, CreatedAt) 
-WHERE Published = FALSE;
-
--- Index for poison message tracking
-CREATE INDEX IF NOT EXISTS IX_PoisonMessages_FailedAt 
-ON PoisonMessages(FailedAt DESC);
-
--- ==========================================
--- SAMPLE DATA (Optional - for testing)
--- ==========================================
-
--- Insert test player wallets
--- INSERT INTO Wallets (PlayerId, Balance, CreatedAt, UpdatedAt)
--- VALUES 
---     ('player-001', 100.00, NOW(), NOW()),
---     ('player-002', 250.50, NOW(), NOW()),
---     ('player-003', 0.00, NOW(), NOW());
+-- Grant all permissions to gameuser
+GRANT ALL ON ALL TABLES IN SCHEMA public TO gameuser;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO gameuser;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO gameuser;
