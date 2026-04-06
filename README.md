@@ -1,12 +1,5 @@
 # Wallet Service - Production-Grade Microservice
 
-[![.NET](https://img.shields.io/badge/.NET-9.0-512BD4style=flat-square&logo=dotnet)](https://dotnet.microsoft.com/)
-[![C#](https://img.shields.io/badge/C%23-13.0-239120style=flat-square&logo=c-sharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-316192style=flat-square&logo=postgresql)](https://www.postgresql.org/)
-[![Redis](https://img.shields.io/badge/Redis-6%2B-DC382Dstyle=flat-square&logo=redis)](https://redis.io/)
-[![Kafka](https://img.shields.io/badge/Kafka-3.0%2B-231F20style=flat-square&logo=apache-kafka)](https://kafka.apache.org/)
-[![Build](https://img.shields.io/badge/build-passing-brightgreenstyle=flat-square)](https://github.com/BFilipB/Wallet)
-
 > **A high-performance, production-ready wallet microservice demonstrating enterprise-grade .NET 9 development, distributed systems patterns, and modern software architecture.**
 
 **Built for:** Portfolio demonstration, technical interviews, and production deployment  
