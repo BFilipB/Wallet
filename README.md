@@ -1,24 +1,24 @@
 # Wallet Service - Production-Grade Microservice
 
-[![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=dotnet)](https://dotnet.microsoft.com/)
-[![C#](https://img.shields.io/badge/C%23-13.0-239120?style=flat-square&logo=c-sharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-316192?style=flat-square&logo=postgresql)](https://www.postgresql.org/)
-[![Redis](https://img.shields.io/badge/Redis-6%2B-DC382D?style=flat-square&logo=redis)](https://redis.io/)
-[![Kafka](https://img.shields.io/badge/Kafka-3.0%2B-231F20?style=flat-square&logo=apache-kafka)](https://kafka.apache.org/)
-[![Build](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)](https://github.com/BFilipB/Wallet)
+[![.NET](https://img.shields.io/badge/.NET-9.0-512BD4style=flat-square&logo=dotnet)](https://dotnet.microsoft.com/)
+[![C#](https://img.shields.io/badge/C%23-13.0-239120style=flat-square&logo=c-sharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-316192style=flat-square&logo=postgresql)](https://www.postgresql.org/)
+[![Redis](https://img.shields.io/badge/Redis-6%2B-DC382Dstyle=flat-square&logo=redis)](https://redis.io/)
+[![Kafka](https://img.shields.io/badge/Kafka-3.0%2B-231F20style=flat-square&logo=apache-kafka)](https://kafka.apache.org/)
+[![Build](https://img.shields.io/badge/build-passing-brightgreenstyle=flat-square)](https://github.com/BFilipB/Wallet)
 
 > **A high-performance, production-ready wallet microservice demonstrating enterprise-grade .NET 9 development, distributed systems patterns, and modern software architecture.**
 
 **Built for:** Portfolio demonstration, technical interviews, and production deployment  
-**Status:** ? All 20 requirements fulfilled, production-ready  
+**Status:**  All 20 requirements fulfilled, production-ready  
 **Performance:** 50,000+ transactions/minute, <150ms p95 latency
 
 ---
 
-## ?? Table of Contents
+##  Table of Contents
 
 - [Overview](#-overview)
-- [Why This Project?](#-why-this-project)
+- [Why This Project](#-why-this-project)
 - [Key Features](#-key-features)
 - [Technical Achievements](#-technical-achievements)
 - [Quick Start](#-quick-start)
@@ -30,7 +30,7 @@
 
 ---
 
-## ?? Overview
+##  Overview
 
 This project implements a **production-grade wallet service** for handling player top-ups in a gaming platform. It showcases expertise in:
 
@@ -43,15 +43,15 @@ This project implements a **production-grade wallet service** for handling playe
 ### Business Problem Solved
 
 Players need to add funds to their gaming wallets quickly and reliably:
-- ? **Idempotency** - Same payment request processed only once
-- ? **High throughput** - Handles 50,000+ requests per minute
-- ? **Event-driven** - Notifies other services of balance changes
-- ? **Audit trail** - Complete transaction history
-- ? **Reliability** - Zero data loss with ACID transactions + outbox pattern
+-  **Idempotency** - Same payment request processed only once
+-  **High throughput** - Handles 50,000+ requests per minute
+-  **Event-driven** - Notifies other services of balance changes
+-  **Audit trail** - Complete transaction history
+-  **Reliability** - Zero data loss with ACID transactions + outbox pattern
 
 ---
 
-## ?? Why This Project?
+##  Why This Project
 
 ### For Interviewers & Reviewers
 
@@ -89,49 +89,49 @@ This project demonstrates:
 
 ---
 
-## ? Key Features
+##  Key Features
 
 ### Core Functionality
 
 | Feature | Implementation | Status |
 |---------|----------------|--------|
-| **Wallet Top-Up** | POST /wallet/topup | ? Complete |
-| **Balance Query** | GET /wallet/{playerId}/balance | ? Complete |
-| **Transaction History** | GET /wallet/{playerId}/history | ? Complete |
-| **Admin Dashboard** | GET /admin/poison-messages | ? Complete |
-| **Health Checks** | GET /health | ? Complete |
+| **Wallet Top-Up** | POST /wallet/topup |  Complete |
+| **Balance Query** | GET /wallet/{playerId}/balance |  Complete |
+| **Transaction History** | GET /wallet/{playerId}/history |  Complete |
+| **Admin Dashboard** | GET /admin/poison-messages |  Complete |
+| **Health Checks** | GET /health |  Complete |
 
 ### Technical Features
 
-- **?? Idempotency**
+- ** Idempotency**
   - Database UNIQUE constraint on external reference
   - Returns same result for duplicate requests
   - No duplicate money creation
   
-- **?? Event-Driven Architecture**
+- ** Event-Driven Architecture**
   - Kafka for async event publishing
   - Transactional outbox pattern (at-least-once delivery)
   - Background worker polls outbox every 5 seconds
   
-- **? High Performance**
+- ** High Performance**
   - 50,000+ requests/minute throughput
   - <150ms p95 latency, <200ms p99
   - Redis caching with 80%+ hit rate
   - PostgreSQL with optimized indexes (50x faster queries)
 
-- **??? Reliability**
+- ** Reliability**
   - ACID transactions for data consistency
   - Poison message handling (3 retries with exponential backoff)
   - Graceful degradation (works without Redis/Kafka)
   - Comprehensive error handling
 
-- **?? Observability**
+- ** Observability**
   - OpenTelemetry traces and metrics
   - Structured logging with correlation IDs
   - Custom counters and histograms
   - Health check endpoints
 
-- **? Code Quality**
+- ** Code Quality**
   - SOLID principles throughout
   - Clean Architecture pattern
   - FluentValidation for input validation
@@ -140,57 +140,57 @@ This project demonstrates:
 
 ---
 
-## ?? Technical Achievements
+##  Technical Achievements
 
 ### Requirements Fulfilled: 20/20 (100%)
 
 #### Task 1: API Design (9/9)
-- ? POST /wallet/topup endpoint with idempotency
-- ? Input validation: { playerId, amount, externalRef }
-- ? Publishes WalletTopUpCompleted event
-- ? PostgreSQL storage with ACID transactions
-- ? Redis caching (5-min TTL for balance)
-- ? Handles high concurrency safely
-- ? Kafka async event publishing
-- ? Health checks with OpenTelemetry
-- ? APM integration with metrics and traces
+-  POST /wallet/topup endpoint with idempotency
+-  Input validation: { playerId, amount, externalRef }
+-  Publishes WalletTopUpCompleted event
+-  PostgreSQL storage with ACID transactions
+-  Redis caching (5-min TTL for balance)
+-  Handles high concurrency safely
+-  Kafka async event publishing
+-  Health checks with OpenTelemetry
+-  APM integration with metrics and traces
 
 #### Task 2: Event-Driven Pipeline (6/6)
-- ? Kafka consumer (BackgroundService pattern)
-- ? Idempotency in message processing
-- ? Poison message handling (3 retries + storage)
-- ? Partition strategy (12-16 partitions for 50K msg/min)
-- ? Graceful scaling with consumer groups
-- ? Redis optimization (two-level caching)
+-  Kafka consumer (BackgroundService pattern)
+-  Idempotency in message processing
+-  Poison message handling (3 retries + storage)
+-  Partition strategy (12-16 partitions for 50K msg/min)
+-  Graceful scaling with consumer groups
+-  Redis optimization (two-level caching)
 
 #### Task 3: SQL + Redis Performance (4/4)
-- ? Performance diagnostics (EXPLAIN ANALYZE)
-- ? Strategic indexes (50x query improvement: 2.5s ? <50ms)
-- ? Redis caching (80%+ hit rate, 5x DB load reduction)
-- ? Active cache invalidation strategy
+-  Performance diagnostics (EXPLAIN ANALYZE)
+-  Strategic indexes (50x query improvement: 2.5s  <50ms)
+-  Redis caching (80%+ hit rate, 5x DB load reduction)
+-  Active cache invalidation strategy
 
 #### Task 4: Coding Excellence (1/1)
-- ? ProcessTopUp method with all requirements
-- ? Idempotency, PostgreSQL, Redis, Event publishing
-- ? ACID transactions, error handling, thread-safety
+-  ProcessTopUp method with all requirements
+-  Idempotency, PostgreSQL, Redis, Event publishing
+-  ACID transactions, error handling, thread-safety
 
 ### Performance Metrics
 
 | Metric | Target | Actual | Achievement |
 |--------|--------|--------|-------------|
-| **API Throughput** | 500 req/sec | 1,000+ req/sec | **200%** ? |
-| **Consumer Throughput** | 833 msg/sec | 833+ msg/sec | **100%** ? |
-| **Top-up Latency (p95)** | <200ms | <150ms | **125%** ? |
-| **Query (cached)** | <50ms | <20ms | **250%** ?? |
-| **Query (uncached)** | <100ms | <50ms | **200%** ? |
-| **Cache Hit Rate** | >80% | 85%+ | **106%** ? |
-| **DB Query Speed** | 10x faster | 50x faster | **500%** ??? |
+| **API Throughput** | 500 req/sec | 1,000+ req/sec | **200%**  |
+| **Consumer Throughput** | 833 msg/sec | 833+ msg/sec | **100%**  |
+| **Top-up Latency (p95)** | <200ms | <150ms | **125%**  |
+| **Query (cached)** | <50ms | <20ms | **250%**  |
+| **Query (uncached)** | <100ms | <50ms | **200%**  |
+| **Cache Hit Rate** | >80% | 85%+ | **106%**  |
+| **DB Query Speed** | 10x faster | 50x faster | **500%**  |
 
-**Overall Grade: A+ (99.2%) - Enterprise-Grade** ??
+**Overall Grade: A+ (99.2%) - Enterprise-Grade** 
 
 ### Code Quality Metrics
 
-- **Build Status:** ? 0 errors, 0 warnings
+- **Build Status:**  0 errors, 0 warnings
 - **Lines of Code:** ~3,000 (excluding tests)
 - **Documentation:** 180+ pages
 - **SOLID Compliance:** 100%
@@ -199,7 +199,7 @@ This project demonstrates:
 
 ---
 
-## ?? Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -280,7 +280,7 @@ curl http://localhost:5000/wallet/player-001/balance
 curl http://localhost:5000/wallet/player-001/history
 ```
 
-**Expected:** All requests return 200 OK with JSON responses ?
+**Expected:** All requests return 200 OK with JSON responses 
 
 For detailed setup instructions, see:
 - **[Complete Beginners Guide](SETUP_GUIDE_BEGINNERS.md)** (30-45 min)
@@ -289,54 +289,54 @@ For detailed setup instructions, see:
 
 ---
 
-## ??? Architecture
+##  Architecture
 
 ### System Overview
 
 ```
-???????????????
-?   Client    ?
-? (HTTP/API)  ?
-???????????????
-       ? POST /wallet/topup
-       ?
-???????????????????????????????????????????????????
-?              Wallet.Api                         ?
-?  ????????????????         ??????????????????? ?
-?  ?  Endpoints   ?  ???    ?  TopUpService   ? ?
-?  ? (Minimal API)?         ?  (Business Logic)? ?
-?  ????????????????         ??????????????????? ?
-?         ?                         ?            ?
-?         ?                         ?            ?
-?  ????????????????         ??????????????????? ?
-?  ? Validation   ?         ?  OutboxWorker   ? ?
-?  ? (Fluent)     ?         ?  (Background)   ? ?
-?  ????????????????         ??????????????????? ?
-?????????????????????????????????????????????????
-       ?                     ?
-       ?                     ?
-???????????????      ???????????????
-? PostgreSQL  ?      ?    Redis    ?
-? (Database)  ?      ?   (Cache)   ?
-?  - Wallets  ?      ?  - Balance  ?
-?  - Txns     ?      ?  - History  ?
-?  - Outbox   ?      ???????????????
-???????????????
-       ? Outbox events
-       ?
-???????????????
-?    Kafka    ?
-? (Events)    ?
-???????????????
-       ? Consume events
-       ?
-???????????????????????????????????????????????????
-?          Wallet.Consumer                        ?
-?  ????????????????         ??????????????????? ?
-?  ?   Worker     ?  ???    ?  TopUpService   ? ?
-?  ?(Background)  ?         ?  (Idempotency)  ? ?
-?  ????????????????         ??????????????????? ?
-???????????????????????????????????????????????????
+
+   Client    
+ (HTTP/API)  
+
+        POST /wallet/topup
+       
+
+              Wallet.Api                         
+            
+    Endpoints           TopUpService    
+   (Minimal API)           (Business Logic) 
+            
+                                              
+                                              
+            
+   Validation              OutboxWorker    
+   (Fluent)                (Background)    
+            
+
+                            
+                            
+      
+ PostgreSQL            Redis    
+ (Database)           (Cache)   
+  - Wallets          - Balance  
+  - Txns             - History  
+  - Outbox         
+
+        Outbox events
+       
+
+    Kafka    
+ (Events)    
+
+        Consume events
+       
+
+          Wallet.Consumer                        
+            
+     Worker             TopUpService    
+  (Background)             (Idempotency)   
+            
+
 ```
 
 ### Key Patterns
@@ -413,7 +413,7 @@ await redis.StringSetAsync(..., TimeSpan.FromMinutes(2));
 
 ---
 
-## ??? Technology Stack
+##  Technology Stack
 
 ### Core Technologies
 
@@ -457,7 +457,7 @@ await redis.StringSetAsync(..., TimeSpan.FromMinutes(2));
 
 ---
 
-## ? Performance
+##  Performance
 
 ### Throughput & Latency
 
@@ -475,7 +475,7 @@ await redis.StringSetAsync(..., TimeSpan.FromMinutes(2));
 ```sql
 -- Seq Scan on wallettransactions (cost=0.00..450.00 rows=10000 width=72)
 -- Planning Time: 0.125 ms
--- Execution Time: 2500.000 ms ?
+-- Execution Time: 2500.000 ms 
 ```
 
 **After Optimization:**
@@ -483,7 +483,7 @@ await redis.StringSetAsync(..., TimeSpan.FromMinutes(2));
 -- Index Scan using ix_wallettransactions_playerid_createdat
 -- (cost=0.29..8.31 rows=1 width=72)
 -- Planning Time: 0.125 ms
--- Execution Time: 0.045 ms ? (50x faster!)
+-- Execution Time: 0.045 ms  (50x faster!)
 ```
 
 **Indexes Created:**
@@ -500,14 +500,14 @@ await redis.StringSetAsync(..., TimeSpan.FromMinutes(2));
 
 **Performance Impact:**
 ```
-Without Cache: 100 requests/sec ? 100 DB queries/sec (60-80% CPU)
-With Cache:    100 requests/sec ?  15 DB queries/sec (10-15% CPU)
-Reduction:     85% fewer database queries ?
+Without Cache: 100 requests/sec  100 DB queries/sec (60-80% CPU)
+With Cache:    100 requests/sec   15 DB queries/sec (10-15% CPU)
+Reduction:     85% fewer database queries 
 ```
 
 ---
 
-## ?? Documentation
+##  Documentation
 
 ### For Interviewers & Reviewers
 
@@ -537,53 +537,53 @@ Start here to understand the project:
 
 ---
 
-## ?? Project Structure
+##  Project Structure
 
 ```
 Wallet/
-??? src/
-?   ??? Wallet.Api/                    # REST API
-?   ?   ??? Endpoints/                 # Minimal API endpoints
-?   ?   ?   ??? WalletEndpoints.cs    # Wallet operations
-?   ?   ?   ??? AdminEndpoints.cs     # Admin operations
-?   ?   ??? Middleware/                # Request pipeline
-?   ?   ?   ??? GlobalExceptionHandler.cs
-?   ?   ?   ??? RequestLoggingMiddleware.cs
-?   ?   ??? Validators/                # Input validation
-?   ?   ?   ??? TopUpRequestValidator.cs
-?   ?   ??? Extensions/                # DI configuration
-?   ?   ?   ??? ServiceCollectionExtensions.cs
-?   ?   ??? Program.cs                 # Application entry
-?   ?
-?   ??? Wallet.Consumer/               # Kafka consumer
-?   ?   ??? Worker.cs                  # BackgroundService
-?   ?   ??? Extensions/                # DI configuration
-?   ?   ??? Program.cs                 # Application entry
-?   ?
-?   ??? Wallet.Infrastructure/         # Business logic
-?   ?   ??? TopUpService.cs           # Core business logic
-?   ?   ??? OutboxPublisher.cs        # Kafka event publisher
-?   ?   ??? OutboxWorker.cs           # Background outbox processor
-?   ?   ??? WalletHistoryService.cs   # Query service with caching
-?   ?   ??? PoisonMessageRepository.cs # Failed message tracking
-?   ?
-?   ??? Wallet.Shared/                 # Shared code
-?       ??? Models.cs                  # DTOs and interfaces
-?       ??? Configuration.cs           # Options classes
-?
-??? database/
-?   ??? schema.sql                     # PostgreSQL schema with indexes
-?
-??? docs/                              # Documentation (180+ pages)
-?   ??? DESIGN_DECISIONS.md           # Architecture reasoning
-?   ??? MANUAL_TESTING.md             # Test scenarios
-?   ??? PERFORMANCE.md                # Performance analysis
-?   ??? REFACTORING_COMPLETE.md       # Code quality
-?   ??? FINAL_SUMMARY.md              # Project summary
-?
-??? docker-compose.yml                 # Docker orchestration
-??? README.md                          # This file
-??? REQUIREMENTS_VERIFICATION.md       # Complete verification (20/20)
+ src/
+    Wallet.Api/                    # REST API
+       Endpoints/                 # Minimal API endpoints
+          WalletEndpoints.cs    # Wallet operations
+          AdminEndpoints.cs     # Admin operations
+       Middleware/                # Request pipeline
+          GlobalExceptionHandler.cs
+          RequestLoggingMiddleware.cs
+       Validators/                # Input validation
+          TopUpRequestValidator.cs
+       Extensions/                # DI configuration
+          ServiceCollectionExtensions.cs
+       Program.cs                 # Application entry
+   
+    Wallet.Consumer/               # Kafka consumer
+       Worker.cs                  # BackgroundService
+       Extensions/                # DI configuration
+       Program.cs                 # Application entry
+   
+    Wallet.Infrastructure/         # Business logic
+       TopUpService.cs           # Core business logic
+       OutboxPublisher.cs        # Kafka event publisher
+       OutboxWorker.cs           # Background outbox processor
+       WalletHistoryService.cs   # Query service with caching
+       PoisonMessageRepository.cs # Failed message tracking
+   
+    Wallet.Shared/                 # Shared code
+        Models.cs                  # DTOs and interfaces
+        Configuration.cs           # Options classes
+
+ database/
+    schema.sql                     # PostgreSQL schema with indexes
+
+ docs/                              # Documentation (180+ pages)
+    DESIGN_DECISIONS.md           # Architecture reasoning
+    MANUAL_TESTING.md             # Test scenarios
+    PERFORMANCE.md                # Performance analysis
+    REFACTORING_COMPLETE.md       # Code quality
+    FINAL_SUMMARY.md              # Project summary
+
+ docker-compose.yml                 # Docker orchestration
+ README.md                          # This file
+ REQUIREMENTS_VERIFICATION.md       # Complete verification (20/20)
 ```
 
 ### Design Principles
@@ -596,29 +596,29 @@ Wallet/
 
 **Dependency Flow:**
 ```
-Wallet.Api ???
-             ???> Wallet.Infrastructure ??> Wallet.Shared
-Wallet.Consumer ??
+Wallet.Api 
+             > Wallet.Infrastructure > Wallet.Shared
+Wallet.Consumer 
 ```
 
 **SOLID Compliance:**
-- ? Single Responsibility - Each class has one job
-- ? Open/Closed - Easy to extend without modifying
-- ? Liskov Substitution - Interfaces properly implemented
-- ? Interface Segregation - Small, focused interfaces
-- ? Dependency Inversion - Depend on abstractions
+-  Single Responsibility - Each class has one job
+-  Open/Closed - Easy to extend without modifying
+-  Liskov Substitution - Interfaces properly implemented
+-  Interface Segregation - Small, focused interfaces
+-  Dependency Inversion - Depend on abstractions
 
 ---
 
-## ?? Security Considerations
+##  Security Considerations
 
 ### Implemented
 
-- ? **Input Validation** - FluentValidation on all endpoints
-- ? **SQL Injection Prevention** - Parameterized queries (Dapper)
-- ? **CORS Configuration** - Allowed origins only
-- ? **No Sensitive Logging** - No passwords or tokens in logs
-- ? **Connection String Security** - Use environment variables in production
+-  **Input Validation** - FluentValidation on all endpoints
+-  **SQL Injection Prevention** - Parameterized queries (Dapper)
+-  **CORS Configuration** - Allowed origins only
+-  **No Sensitive Logging** - No passwords or tokens in logs
+-  **Connection String Security** - Use environment variables in production
 
 ### Production Recommendations
 
@@ -651,7 +651,7 @@ For production deployment:
 
 ---
 
-## ?? Deployment
+##  Deployment
 
 ### Docker
 
@@ -711,7 +711,7 @@ az containerapp up \
 
 ---
 
-## ?? Testing
+##  Testing
 
 ### Manual Testing
 
@@ -780,7 +780,7 @@ export default function () {
 
 ---
 
-## ?? Monitoring & Observability
+##  Monitoring & Observability
 
 ### OpenTelemetry Metrics
 
@@ -803,12 +803,12 @@ Every request includes:
 Example trace:
 ```
 TopUp Request [trace-id: abc123]
-  ?? Validate Input [span-id: 001]
-  ?? Check Idempotency [span-id: 002]
-  ?? Update Balance [span-id: 003]
-  ?? Insert Transaction [span-id: 004]
-  ?? Save to Outbox [span-id: 005]
-  ?? Update Cache [span-id: 006]
+   Validate Input [span-id: 001]
+   Check Idempotency [span-id: 002]
+   Update Balance [span-id: 003]
+   Insert Transaction [span-id: 004]
+   Save to Outbox [span-id: 005]
+   Update Cache [span-id: 006]
 ```
 
 ### Logging
@@ -832,7 +832,7 @@ Structured logging with Serilog:
 
 ---
 
-## ?? Contributing
+##  Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -861,13 +861,13 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## ?? License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## ?? Author
+##  Author
 
 **Filip Borkovic**
 
@@ -877,36 +877,36 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## ?? Acknowledgments
+##  Acknowledgments
 
-- Built with ?? using .NET 9
+- Built with  using .NET 9
 - Inspired by microservices best practices
 - Special thanks to the .NET community
 
 ---
 
-## ?? Contact & Support
+##  Contact & Support
 
-**Questions?** Open an issue or reach out:
-- ?? GitHub Issues: [Create an issue](https://github.com/BFilipB/Wallet/issues)
-- ?? Email: filip.borkovic@example.com
+**Questions** Open an issue or reach out:
+-  GitHub Issues: [Create an issue](https://github.com/BFilipB/Wallet/issues)
+-  Email: filip.borkovic@example.com
 
 ---
 
-## ? Show Your Support
+##  Show Your Support
 
 If you found this project helpful or learned something new:
 
-- ? **Star this repository**
-- ?? **Fork it** to try it yourself
-- ?? **Share it** with others
-- ?? **Provide feedback** via issues
+-  **Star this repository**
+-  **Fork it** to try it yourself
+-  **Share it** with others
+-  **Provide feedback** via issues
 
 ---
 
-**Built with** ?? **using .NET 9 | Production-Ready | Interview-Ready | Portfolio-Ready**
+**Built with**  **using .NET 9 | Production-Ready | Interview-Ready | Portfolio-Ready**
 
-**Status:** ? All 20 requirements fulfilled | ? Build passing | ? Production-ready
+**Status:**  All 20 requirements fulfilled |  Build passing |  Production-ready
 
 ---
 
