@@ -867,13 +867,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-##  Author
-
-**Filip Borkovic**
-
-- GitHub: [@BFilipB](https://github.com/BFilipB)
-- LinkedIn: [Filip Borkovic](https://linkedin.com/in/filipborkovic)
-- Portfolio: [filipborkovic.com](https://filipborkovic.com)
 
 ---
 
@@ -888,9 +881,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ##  Contact & Support
 
 **Questions** Open an issue or reach out:
--  GitHub Issues: [Create an issue](https://github.com/BFilipB/Wallet/issues)
--  Email: filip.borkovic@example.com
-
+-  GitHub Issues: [Create an issue](https://github.com/BFilipB/Wallet/issues
 ---
 
 ##  Show Your Support
